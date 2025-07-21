@@ -13,8 +13,9 @@ class Diagnostics:
 
     @property
     def interface(self):
-        from .interface import Interface
         if self._interface is None:
-            self._interface = Interface(self._client)
+            from .interface import Interface
+            self._interface = Interface(self)
+
 
         return self._interface

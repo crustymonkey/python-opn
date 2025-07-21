@@ -16,9 +16,10 @@ class OPNClient:
 
     @property
     def diagnostics(self):
-        from .modules.diagnostics import Diagnostics
         if self._diagnostics is None:
+            from .modules.diagnostics import Diagnostics
             self._diagnostics = Diagnostics(self)
+
 
         return self._diagnostics
 
