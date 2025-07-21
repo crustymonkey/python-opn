@@ -11,11 +11,16 @@ class OPNClient:
             self._base_url += '/api'
         self._ssl_verify = ssl_verify
 
+        # Cache the different modules
+        self._diagnostics = None
+
     @property
     def diagnostics(self):
         from .modules.diagnostics import Diagnostics
+        if self._diagnostics is None:
+            self._diagnostics = Diagnostics(self)
 
-        return Diagnostics(self)
+        return self._diagnostics
 
     def _get_response(self, uri_path: str, params: Optional[Dict]=None, method: str='GET'):
         url = f'{self._base_url}/{uri_path}?'

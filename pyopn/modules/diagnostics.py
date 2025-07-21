@@ -1,10 +1,11 @@
-#import weakref
 from ..client import OPNClient
 
 class Diagnostics:
     def __init__(self, client: OPNClient):
-        #self._client = weakref.proxy(client)
         self._client = client
+
+        # Cache the different diagnostics modules
+        self._interface = None
 
     @property
     def name(self):
@@ -13,5 +14,7 @@ class Diagnostics:
     @property
     def interface(self):
         from .interface import Interface
+        if self._interface is None:
+            self._interface = Interface(self._client)
 
-        return Interface(self)
+        return self._interface

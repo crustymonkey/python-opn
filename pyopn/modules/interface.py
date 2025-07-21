@@ -1,11 +1,9 @@
-#import weakref
 from typing import Any
 from ..utils import LeafMixin
 
 
 class Interface(LeafMixin):
     def __init__(self, parent: Any):
-        #self._parent = weakref.proxy(parent)
         self._parent = parent
 
     @property
