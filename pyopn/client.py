@@ -1,3 +1,4 @@
+import logging
 import requests
 from typing import Optional, Dict
 
@@ -13,6 +14,7 @@ class OPNClient:
 
         # Cache the different modules
         self._diagnostics = None
+        self._firewall = None
 
     @property
     def diagnostics(self):
@@ -23,8 +25,18 @@ class OPNClient:
 
         return self._diagnostics
 
+    @property
+    def firewall(self):
+        if self._firewall is None:
+            from .modules.firewall import Firewall
+            self._firewall = Firewall(self)
+
+
+        return self._firewall
+
     def _get_response(self, uri_path: str, params: Optional[Dict]=None, method: str='GET'):
         url = f'{self._base_url}/{uri_path}?'
+        logging.debug(f'Sending request to: {url}')
 
         if method == 'GET':
             return requests.get(
