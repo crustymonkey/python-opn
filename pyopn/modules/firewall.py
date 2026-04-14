@@ -33,8 +33,8 @@ class Firewall:
     @property
     def alias_util(self):
         if self._alias_util is None:
-            from ..controllers import AliasUtil
-            self._alias_util = AliasUtil(self)
+            from ..controllers import Alias_Util
+            self._alias_util = Alias_Util(self)
 
         return self._alias_util
 

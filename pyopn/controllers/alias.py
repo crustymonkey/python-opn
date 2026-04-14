@@ -51,3 +51,19 @@ class Alias(LeafMixin):
         path = f'{self.get_path()}/set_item/{uuid}'
 
         return self._parent._client._get_response(path, params, 'POST').json()
+
+    def get_item(self, uuid: str):
+        path = f'{self.get_path()}/get_item/{uuid}'
+
+        return self._parent._client._get_response(path).json()
+
+    def get_alias_uuid(self, name: str):
+        path = f'{self.get_path()}/get_alias_u_u_i_d/{name}'
+
+        return self._parent._client._get_response(path).json()
+
+    def get_alias_u_u_i_d(self, name: str):
+        return self.get_alias_uuid(name)
+
+    def get_geo_ip(self):
+        return self.get_geo_i_p()
